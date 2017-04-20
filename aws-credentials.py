@@ -4,6 +4,7 @@ import re
 import sys
 import shutil
 import boto3
+import time
 from configobj import ConfigObj
 
 from optparse import OptionParser
@@ -19,9 +20,9 @@ class Keys(object):
         self.Secret = Secret
         self.Token = Token
 
-if os.path.isfile("config.ini"):
+if os.path.isfile(os.path.dirname(os.path.abspath(__file__)) +  "/config.ini"):
 
-    Options = Struct(**ConfigObj("config.ini"))
+    Options = Struct(**ConfigObj(os.path.dirname(os.path.abspath(__file__)) + "/config.ini"))
 
     Parser = OptionParser()
     Parser.add_option("-t", "--token", dest="MfaToken",
@@ -149,4 +150,14 @@ with open(fn, 'a') as f:
     f.write("aws_secret_access_key = " + Credentials.Secret + "\n")
     f.write("aws_security_token = " + Credentials.Token + "\n")
 
-
+#  you can now source this file ". ~/bin/tmptoken.sh" to get your keys
+#  and tokens in your current Shell Environment for use with local
+#  Ansible development. When ~/bin is on your PATH, you can just `.
+#  tmptoken.sh' and it will automatically find it.
+tmptoken = Options.HomeDir + "/bin/tmptoken.sh"
+with open(tmptoken, 'w') as f:
+    f.write("# Last Modified: "+ time.strftime("%d/%m/%Y %H:%M:%S")+"'\n")
+    f.write("export AWS_ACCESS_KEY_ID='"+Credentials.Access+"'\n")
+    f.write("export AWS_SECRET_ACCESS_KEY='"+Credentials.Secret+"'\n")
+    f.write("export AWS_SESSION_TOKEN='"+Credentials.Token+"'\n")
+    f.write("# export AWS_DEFAULT_PROFILE='"+Options.NewProfile+"'\n")
