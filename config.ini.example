@@ -1,6 +1,7 @@
 HomeDir = "<YourHomeDirectory>"
 NewProfile = "<NameOfTheNewProfile>"
 IamUserArn = "arn:aws:iam::XXXXXXXXXXXXX:mfa/user.name"
+Region     = "ap-southeast-2"
 
 # Role To Assume
-IamRoleArn = "arn:aws:iam::XXXXXXXXXXXX:role/RolName"
+IamRoleArn = "arn:aws:iam::XXXXXXXXXXXX:role/RoleName"
