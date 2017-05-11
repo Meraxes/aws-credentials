@@ -156,8 +156,10 @@ with open(fn, 'a') as f:
 #  tmptoken.sh' and it will automatically find it.
 tmptoken = Options.HomeDir + "/bin/tmptoken.sh"
 with open(tmptoken, 'w') as f:
-    f.write("# Last Modified: "+ time.strftime("%d/%m/%Y %H:%M:%S")+"'\n")
+    f.write("# Last Modified: "+ time.strftime("%d/%m/%Y %H:%M:%S")+"\n")
+    # f.write("# export AWS_DEFAULT_PROFILE='"+Options.NewProfile+"'\n")
+    f.write("export AWS_DEFAULT_REGION='"+Options.Region+"'\n")
+    f.write("export AWS_REGION='"+Options.Region+"'\n")
     f.write("export AWS_ACCESS_KEY_ID='"+Credentials.Access+"'\n")
     f.write("export AWS_SECRET_ACCESS_KEY='"+Credentials.Secret+"'\n")
     f.write("export AWS_SESSION_TOKEN='"+Credentials.Token+"'\n")
-    f.write("# export AWS_DEFAULT_PROFILE='"+Options.NewProfile+"'\n")
