@@ -25,10 +25,10 @@ NewProfile = "osssio-staff"
 Region = "ap-southeast-2"
 
 # Your user mfa arn (source account)
-IamUserArn = "arn:aws:iam::650679463300:mfa/felipe.alvarez"
+IamUserArn = "arn:aws:iam::650679463300:mfa/john.smith"
 
 # Role arn on the destination account
-IamRoleArn = "arn:aws:iam::051402705597:role/ITOCAccountAccess"
+IamRoleArn = "arn:aws:iam::051402705597:role/myrole"
 ```
 
 * Run: `aws-credentials.py -t XXXXXX`
@@ -37,3 +37,7 @@ Where XXXXXX is the output of your MFA device.
 
 * When successful, source environment variables:
 `. tmptoken.sh`
+
+## Licence
+
+MIT
