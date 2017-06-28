@@ -40,7 +40,7 @@ if os.path.isfile(os.path.dirname(os.path.abspath(__file__)) +  "/config.ini"):
 else:
 
     Parser = OptionParser()
-    Parser.add_option("-h", "--home", dest="HomeDir",
+    Parser.add_option("-d", "--home", dest="HomeDir",
                       help="Path to your local home directory")
     Parser.add_option("-p", "--profile", dest="ProfileName",
                       help="""AWS credential profile name. Default will
@@ -53,6 +53,10 @@ else:
                       help="""Iam role for cross account access.
                               Defaults to local IAM user account
                               if not supplied""")
+    Parser.add_option("-R", "--region", dest="Region",
+                      help="""Account name to assume""")
+    Parser.add_option("-a", "--assume", dest="NewProfile",
+                      help="""Account name to assume""")
     Parser.add_option("-t", "--token", dest="MfaToken",
                       help="""MFA token for custom authentication.
                               Role based authentication will be used
