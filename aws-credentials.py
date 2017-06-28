@@ -40,7 +40,7 @@ if os.path.isfile(os.path.dirname(os.path.abspath(__file__)) +  "/config.ini"):
 else:
 
     Parser = OptionParser()
-    Parser.add_option("-h", "--home", dest="HomeDir",
+    Parser.add_option("-d", "--home", dest="HomeDir",
                       help="Path to your local home directory")
     Parser.add_option("-p", "--profile", dest="ProfileName",
                       help="""AWS credential profile name. Default will
@@ -53,6 +53,10 @@ else:
                       help="""Iam role for cross account access.
                               Defaults to local IAM user account
                               if not supplied""")
+    Parser.add_option("-R", "--region", dest="Region",
+                      help="""Account name to assume""")
+    Parser.add_option("-a", "--assume", dest="NewProfile",
+                      help="""Account name to assume""")
     Parser.add_option("-t", "--token", dest="MfaToken",
                       help="""MFA token for custom authentication.
                               Role based authentication will be used
@@ -157,9 +161,9 @@ with open(fn, 'a') as f:
 tmptoken = Options.HomeDir + "/bin/tmptoken.sh"
 with open(tmptoken, 'w') as f:
     f.write("# Last Modified: "+ time.strftime("%d/%m/%Y %H:%M:%S")+"\n")
-    # f.write("# export AWS_DEFAULT_PROFILE='"+Options.NewProfile+"'\n")
+    f.write("#  Do not use AWS_PROFILE when AWS_*_KEY variables are set\n")
+    f.write("#export AWS_PROFILE='"+Options.NewProfile+"'\n")
     f.write("export AWS_DEFAULT_REGION='"+Options.Region+"'\n")
-    f.write("export AWS_REGION='"+Options.Region+"'\n")
     f.write("export AWS_ACCESS_KEY_ID='"+Credentials.Access+"'\n")
     f.write("export AWS_SECRET_ACCESS_KEY='"+Credentials.Secret+"'\n")
     f.write("export AWS_SESSION_TOKEN='"+Credentials.Token+"'\n")
